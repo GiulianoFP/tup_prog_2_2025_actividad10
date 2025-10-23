@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ejercicio1.Models
 {
-    internal class Resolucion
+    public class Resolucion
     {
     }
 }
