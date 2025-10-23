@@ -4,6 +4,7 @@ namespace Ejercicio1;
 
 public partial class Form1 : Form
 {
+    CentroDeAtencion centro=new CentroDeAtencion();
     public Form1()
     {
         InitializeComponent();
@@ -19,11 +20,12 @@ public partial class Form1 : Form
         if (openFileDialog1.ShowDialog() == DialogResult.OK)
         {
             string path=openFileDialog1.FileName;
+            
             FileStream fs = null;
             try
             {
                 fs = new FileStream(path, FileMode.Open, FileAccess.Write);
-
+                centro.ImportarCsvSolicitudesEntrantes(fs);
             }
             catch (Exception ex)
             {
@@ -33,7 +35,10 @@ public partial class Form1 : Form
             {
                 if(fs != null) fs.Close();
             }
-        
+
+            VerSolicitudesPendientes();
+
+
         }
     }
 
@@ -41,7 +46,7 @@ public partial class Form1 : Form
     {
         lsbVerSolicitudesImportadas.Items.Clear();
 
-        LinkedListNode<Solicitud> nodo = centro.GetSolicitudPendiente;
+        LinkedListNode<Solicitud> nodo = centro.GetSolicitudPendiente();
         while (nodo != null)
         {
             lsbVerSolicitudesImportadas.Items.Add(nodo.Value);
